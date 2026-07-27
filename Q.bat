@@ -43,7 +43,6 @@ IF %cmnd% == mrt goto MSRT
 IF %cmnd% == ping goto Ping
 IF %cmnd% == netstat goto Netstat
 IF %cmnd% == tracert goto Tracert
-IF %cmnd% == ip tracker goto IP_Tracker
 ELSE goto Error Message
 
 
@@ -102,12 +101,6 @@ cls
 echo.
 set /p trace="Write the IP: "
 tracert %trace%
-pause>NUL
-goto Menu
-
-:IP_Tracker
-cls
-echo %NUMBER_OF_PROCESSORS%
 pause>NUL
 goto Menu
 
