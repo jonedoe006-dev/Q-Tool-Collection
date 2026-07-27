@@ -43,6 +43,8 @@ IF %cmnd% == mrt goto MSRT
 IF %cmnd% == ping goto Ping
 IF %cmnd% == netstat goto Netstat
 IF %cmnd% == tracert goto Tracert
+IF %cmnd% == netpassword goto NetPassword
+IF %cmnd% == batreport goto BateryReport
 ELSE goto Error Message
 
 
@@ -68,10 +70,16 @@ echo 'mrt'
 echo Execute the %Red%Windows Malicious Software Removal Tool%Reset%
 echo.
 echo 'tracert'
-echo Shows the path the data follow from your PC to Google DNS
+echo Shows the path the data follow from your PC to an IP
 echo.
 echo 'netstat' %Red%Defectuosa!%Reset%
 echo --------------
+echo.
+echo 'netpassword' %Red%Defectuosa!%Reset%
+echo --------------
+echo.
+echo 'batreport'
+echo Create a report of the battery in a local html file
 pause>NUL
 goto Menu
 
@@ -101,6 +109,19 @@ cls
 echo.
 set /p trace="Write the IP: "
 tracert %trace%
+pause>NUL
+goto Menu
+
+:NetPassword
+cls
+set /p InternetName="Internet Name"
+netsh wlan show profile name=%InternetName% key=clear
+pause>NUL
+goto Menu
+
+:BateryReport
+cls
+powercfg /batteryreport
 pause>NUL
 goto Menu
 
