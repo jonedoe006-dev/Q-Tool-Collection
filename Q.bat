@@ -19,19 +19,19 @@ set "Test1=%ESC%[103m"
 :Menu
 cls
 echo.
-echo                                    ------------------------
+echo                                   .---------------------------.
 echo                                    Hello %USERNAME%, welllcome
-echo                                    ------------------------
-echo              QQQQQQQQ
-echo            QQQ      QQQ
-echo           QQQ        QQQ
-echo           QQQ        QQQ
-echo          QQQ          QQQ
-echo           QQQ        QQQ
-echo           QQQ        QQQ
-echo            QQQ      QQQ
-echo              QQQQQQQQ
-echo                    QQQQ
+echo                                   .---------------------------.
+echo                  QQQQQQQQ
+echo                QQQ      QQQ
+echo               QQQ        QQQ
+echo               QQQ        QQQ
+echo              QQQ          QQQ
+echo               QQQ        QQQ
+echo               QQQ        QQQ
+echo                QQQ      QQQ
+echo                  QQQQQQQQ
+echo                        QQQQ
 echo by %Yellow%"Jonathan Doe"%Reset%
 echo.
 timeout /t 1 /nobreak > nul
@@ -45,6 +45,9 @@ IF %cmnd% == netstat goto Netstat
 IF %cmnd% == tracert goto Tracert
 IF %cmnd% == netpassword goto NetPassword
 IF %cmnd% == batreport goto BateryReport
+IF %cmnd% == netpassword goto NetPassword
+IF %cmnd% == ipchange goto IPchange
+IF %cmnd% == ipshow goto IPshow
 ELSE goto Error Message
 
 
@@ -72,14 +75,17 @@ echo.
 echo 'tracert'
 echo Shows the path the data follow from your PC to an IP
 echo.
-echo 'netstat' %Red%Defectuosa!%Reset%
-echo --------------
+echo 'netstat' %Red%Defective! working on it...%Reset%
+echo List of all active connections, open ports, and the PID (process ID) using them.
 echo.
-echo 'netpassword' %Red%Defectuosa!%Reset%
-echo --------------
+echo 'netpassword'
+echo Show the Info of the WiFi. Need to have connected at least once
 echo.
-echo 'batreport'
-echo Create a report of the battery in a local html file
+echo 'ipshow'
+echo Show your ip Info
+echo.
+echo 'ipchange' %Red%Defective! working on it...%Reset%
+echo Changes your ip
 pause>NUL
 goto Menu
 
@@ -92,15 +98,6 @@ goto Menu
 :Netstat
 cls
 netstat -ano
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
 pause>NUL
 goto Menu
 
@@ -129,3 +126,28 @@ goto Menu
 cls
 mrt.exe
 echo Running...
+
+:NetPassword
+cls
+::netsh wlan show all profiles
+echo.
+netsh wlan show profile name="%red_nombre%" key=clear | findstr /C:"Key Content"
+pause>NUL
+goto Menu
+
+:IPshow
+cls
+ipconfig
+pause>NUL
+goto Menu
+
+:IPchange
+cls
+echo %White%IP release%Reset%
+ipconfig /release
+echo -------------------------------------------------------------------
+echo %White%IP renew%Reset%
+ipconfig /renew
+echo %White%End%Reset%
+pause>NUL
+goto Menu
